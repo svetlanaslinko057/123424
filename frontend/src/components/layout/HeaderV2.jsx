@@ -16,7 +16,6 @@ export default function HeaderV2({ lang = "uk", user, onLogout }) {
   const [suggestions, setSuggestions] = useState([]);
   const [showMega, setShowMega] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
-  const [cartCount, setCartCount] = useState(0);
   const searchRef = useRef(null);
   const megaRef = useRef(null);
   const navigate = useNavigate();
