@@ -57,12 +57,6 @@ export default function HeaderV2({ lang = "uk", user, onLogout }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Load cart count
-  useEffect(() => {
-    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-    setCartCount(cart.reduce((sum, item) => sum + (item.qty || item.quantity || 1), 0));
-  }, []);
-
   const submitSearch = (e) => {
     e.preventDefault();
     if (query.trim()) {
