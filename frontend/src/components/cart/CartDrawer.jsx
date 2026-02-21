@@ -18,6 +18,13 @@ export default function CartDrawer({ isOpen, onClose }) {
   const [loading, setLoading] = useState(false);
   const [removingItem, setRemovingItem] = useState(null);
 
+  // Fetch cart and products when drawer opens
+  useEffect(() => {
+    if (isOpen) {
+      fetchCart(); // Refresh cart data from server
+    }
+  }, [isOpen]);
+
   // Fetch products for cart items
   useEffect(() => {
     if (isOpen && cart?.items?.length > 0) {
