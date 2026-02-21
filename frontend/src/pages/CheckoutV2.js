@@ -31,9 +31,12 @@ const FREE_DELIVERY_THRESHOLD = 2000;
 
 const CheckoutV2 = () => {
   const { user, isAuthenticated } = useAuth();
-  const { cartItems, cartTotal, clearCart, fetchCart } = useCart();
+  const { cart, cartTotal, clearCart, fetchCart } = useCart();
   const { t } = useLanguage();
   const navigate = useNavigate();
+  
+  // Get cart items from cart object
+  const cartItems = cart?.items || [];
 
   // Form state
   const [customerData, setCustomerData] = useState({
