@@ -111,27 +111,8 @@ class YStoreAPITester:
         """Test admin authentication"""
         print(f"\n🔍 Testing admin authentication...")
         
-        # First try to register an admin user
-        admin_register_data = {
-            "email": self.admin_email,
-            "password": self.admin_password,
-            "full_name": "Test Admin",
-            "role": "admin"
-        }
-        
-        print("Attempting to register admin user...")
-        response, error = self.make_request(
-            'POST', '/auth/register',
-            data=admin_register_data,
-            expect_status=201
-        )
-        
-        if response and response["success"] and response["data"].get("access_token"):
-            self.admin_token = response["data"]["access_token"]
-            return self.log_result("Admin Registration & Login", True, "Admin user created and token obtained")
-        
-        # If registration failed, try login
-        print("Registration failed or user exists, trying login...")
+        # Try login with provided credentials
+        print("Trying login with provided admin credentials...")
         response, error = self.make_request(
             'POST', '/auth/login',
             data={
