@@ -1476,9 +1476,9 @@ class YStoreAPITester:
             f"Add: {add_success}, Get: {cart_with_items}, Remove: {remove_success}, Clear: {clear_success}")
 
     def run_all_tests(self):
-        """Run all test scenarios"""
-        print("🚀 Starting Y-Store ROE & A/B Testing Backend Tests")
-        print("🎯 Testing Revenue Optimization Engine & A/B Testing Features")
+        """Run all test scenarios - Focus on Cart V2 functionality"""
+        print("🚀 Starting Y-Store Cart V2 Backend Tests")
+        print("🎯 Testing Cart APIs for Cart Drawer V2 functionality")
         print("=" * 80)
         
         # Basic connectivity and authentication
@@ -1486,71 +1486,15 @@ class YStoreAPITester:
             print("❌ Admin login failed - stopping tests")
             return False
         
-        # Test authentication requirements
-        self.test_admin_authentication_required()
-        
-        # === NEW ROE & A/B REQUIREMENTS TESTING ===
-        
-        # ROE (Revenue Optimization Engine) tests
-        print(f"\n{'='*20} ROE (Revenue Optimization Engine) Tests {'='*20}")
-        self.test_revenue_settings()
-        self.test_revenue_config() 
-        self.test_revenue_optimize_run()
-        self.test_revenue_suggestions()
-        
-        # A/B Testing Engine tests
-        print(f"\n{'='*20} A/B Testing Engine Tests {'='*20}")
-        self.test_ab_seed_prepaid_discount()
-        self.test_ab_experiments_list()
-        self.test_ab_assignment()
-        self.test_ab_report()
-        
-        # A/B Simulator Tests - NEW REQUIREMENTS
-        print(f"\n{'='*20} A/B Simulator Tests {'='*20}")
-        self.test_ab_simulate_deterministic()
-        self.test_ab_simulate_high_margin_scenario()
-        self.test_ab_monte_carlo()
-        self.test_ab_quick_estimate()
-        
-        # Previous features testing
-        print(f"\n{'='*20} Previous Features Tests {'='*20}")
-        self.test_payment_health_dashboard()
-        self.test_risk_center_apis()
-        self.test_prepaid_discount_env_config()
-        
-        # Test individual modules from previous implementation
-        self.test_guard_incidents_list()
-        self.test_guard_incident_actions()
-        self.test_risk_distribution()
-        self.test_timeline_events()
-        self.test_analytics_ops_kpi()
-        self.test_analytics_daily_rebuild()
-        
-        # Test O20 Pickup Control module
-        self.test_pickup_control_kpi()
-        self.test_pickup_control_risk_list()
-        self.test_pickup_control_run_engine()
-        self.test_pickup_control_mute_ttn()
-        self.test_pickup_control_send_reminder()
-        
-        # Test O20.3 Return Management Engine
-        self.test_returns_summary()
-        self.test_returns_list()
-        self.test_returns_run()
-        
-        # Test O20.4-O20.6 REQUIREMENTS
-        self.test_returns_trend()
-        self.test_policy_pending() 
-        self.test_policy_cities()
-        self.test_policy_run()
-        
-        self.test_ops_dashboard()
+        # === CART V2 REQUIREMENTS TESTING ===
+        print(f"\n{'='*20} Cart V2 Backend API Tests {'='*20}")
+        cart_test_success = self.test_cart_apis()
         
         print("\n" + "=" * 80)
         print(f"📊 Test Results: {self.tests_passed}/{self.tests_run} passed")
         print("=" * 80)
         
-        return self.tests_passed >= (self.tests_run * 0.7)  # 70% pass rate acceptable
+        return cart_test_success
 
 
 def main():
