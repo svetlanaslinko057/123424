@@ -104,6 +104,7 @@
 - BLOCK V2-10: Order Flow + Refunds
 - BLOCK V2-11: Design System + UI Unification Layer
 - BLOCK V2-12: Retail Header + MegaMenu + Search Suggestions
+- BLOCK V2-13: Cart V2 + Side Drawer + Mini Cart Animation ✅ (2026-02-21)
 
 ### 📋 PENDING (Next Tasks from user)
 - BLOCK V2-13: Cart V2 + Side Drawer + Mini Cart Animation
