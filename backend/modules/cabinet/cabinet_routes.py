@@ -217,3 +217,193 @@ async def remove_from_wishlist(product_id: str, request: Request):
     )
     
     return {"message": "Removed from wishlist"}
+
+
+
+# ============= OTP CABINET (GUEST ACCESS) =============
+
+async def get_cabinet_session(request: Request) -> Optional[dict]:
+    """Get cabinet session from token (for guest access)"""
+    cabinet_token = request.cookies.get("cabinet_token")
+    if not cabinet_token:
+        auth_header = request.headers.get("X-Cabinet-Token")
+        if auth_header:
+            cabinet_token = auth_header
+    
+    if not cabinet_token:
+        return None
+    
+    session = await db.cabinet_sessions.find_one({"token": cabinet_token}, {"_id": 0})
+    if not session:
+        return None
+    
+    # Check expiry
+    expires_at = session.get("expires_at")
+    if isinstance(expires_at, str):
+        expires_at = datetime.fromisoformat(expires_at)
+    if expires_at and expires_at.replace(tzinfo=timezone.utc) < datetime.now(timezone.utc):
+        return None
+    
+    return session
+
+
+@router.post("/otp/request", response_model=OTPResponse)
+async def request_otp(data: OTPRequest):
+    """
+    Request OTP code for guest cabinet access
+    MOCKED: Does not actually send SMS, just creates OTP in DB
+    """
+    phone = data.phone.replace(" ", "").replace("-", "")
+    
+    if len(phone) < 10:
+        raise HTTPException(status_code=400, detail="Invalid phone number")
+    
+    # Check for existing orders with this phone
+    orders_count = await db.orders.count_documents({"customer.phone": phone})
+    if orders_count == 0:
+        raise HTTPException(status_code=404, detail="Немає замовлень з цим номером телефону")
+    
+    # Generate 6-digit OTP
+    otp_code = str(random.randint(100000, 999999))
+    expires_at = datetime.now(timezone.utc) + timedelta(minutes=5)
+    
+    # Save OTP
+    await db.cabinet_otps.update_one(
+        {"phone": phone},
+        {
+            "$set": {
+                "code": otp_code,
+                "expires_at": expires_at.isoformat(),
+                "used": False,
+                "created_at": datetime.now(timezone.utc).isoformat()
+            }
+        },
+        upsert=True
+    )
+    
+    # MOCKED: In production, send SMS here
+    logger.info(f"[MOCKED SMS] OTP for {phone}: {otp_code}")
+    
+    return OTPResponse(
+        success=True,
+        message=f"Код надіслано на {phone}. [DEV: код {otp_code}]",
+        expires_in=300
+    )
+
+
+@router.post("/otp/verify")
+async def verify_otp(data: OTPVerify):
+    """
+    Verify OTP and create cabinet session
+    Returns session token for subsequent requests
+    """
+    phone = data.phone.replace(" ", "").replace("-", "")
+    
+    otp_record = await db.cabinet_otps.find_one({"phone": phone}, {"_id": 0})
+    
+    if not otp_record:
+        raise HTTPException(status_code=400, detail="OTP не знайдено. Спробуйте ще раз")
+    
+    if otp_record.get("used"):
+        raise HTTPException(status_code=400, detail="Код вже використано")
+    
+    # Check expiry
+    expires_at = otp_record.get("expires_at")
+    if isinstance(expires_at, str):
+        expires_at = datetime.fromisoformat(expires_at)
+    if expires_at and expires_at.replace(tzinfo=timezone.utc) < datetime.now(timezone.utc):
+        raise HTTPException(status_code=400, detail="Код протермінований")
+    
+    if otp_record.get("code") != data.code:
+        raise HTTPException(status_code=400, detail="Невірний код")
+    
+    # Mark OTP as used
+    await db.cabinet_otps.update_one(
+        {"phone": phone},
+        {"$set": {"used": True}}
+    )
+    
+    # Create cabinet session
+    session_token = str(uuid.uuid4())
+    session_expires = datetime.now(timezone.utc) + timedelta(days=7)
+    
+    await db.cabinet_sessions.insert_one({
+        "token": session_token,
+        "phone": phone,
+        "created_at": datetime.now(timezone.utc).isoformat(),
+        "expires_at": session_expires.isoformat()
+    })
+    
+    return {
+        "success": True,
+        "token": session_token,
+        "phone": phone,
+        "expires_at": session_expires.isoformat()
+    }
+
+
+@router.get("/guest/orders")
+async def get_guest_orders(request: Request):
+    """
+    Get orders for guest user (via cabinet session)
+    """
+    session = await get_cabinet_session(request)
+    
+    if not session:
+        raise HTTPException(status_code=401, detail="Необхідна авторизація через OTP")
+    
+    phone = session.get("phone")
+    
+    # Find orders by phone
+    orders = await db.orders.find(
+        {"customer.phone": phone},
+        {"_id": 0}
+    ).sort("created_at", -1).to_list(100)
+    
+    return {
+        "orders": orders,
+        "phone": phone,
+        "total": len(orders)
+    }
+
+
+@router.get("/guest/orders/{order_id}")
+async def get_guest_order_detail(order_id: str, request: Request):
+    """
+    Get single order details for guest user
+    """
+    session = await get_cabinet_session(request)
+    
+    if not session:
+        raise HTTPException(status_code=401, detail="Необхідна авторизація через OTP")
+    
+    phone = session.get("phone")
+    
+    order = await db.orders.find_one(
+        {"id": order_id, "customer.phone": phone},
+        {"_id": 0}
+    )
+    
+    if not order:
+        raise HTTPException(status_code=404, detail="Замовлення не знайдено")
+    
+    # Get TTN tracking if available
+    if order.get("delivery", {}).get("ttn"):
+        ttn = order["delivery"]["ttn"]
+        tracking = await db.ttn_tracking.find_one({"ttn": ttn}, {"_id": 0})
+        order["tracking"] = tracking
+    
+    return order
+
+
+@router.post("/guest/logout")
+async def guest_logout(request: Request):
+    """
+    Logout from guest cabinet
+    """
+    session = await get_cabinet_session(request)
+    
+    if session:
+        await db.cabinet_sessions.delete_one({"token": session.get("token")})
+    
+    return {"success": True, "message": "Вихід виконано"}
