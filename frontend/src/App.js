@@ -101,7 +101,8 @@ function App() {
                           <Route path="/favorites" element={<Favorites />} />
                           <Route path="/comparison" element={<Comparison />} />
                           <Route path="/cart" element={<Cart />} />
-                          <Route path="/checkout" element={<CheckoutV2 />} />
+                          <Route path="/checkout" element={<CheckoutV3 />} />
+                          <Route path="/checkout/v2" element={<CheckoutV2 />} />
                           <Route path="/checkout/old" element={<Checkout />} />
                           <Route path="/checkout/success" element={<CheckoutSuccess />} />
                           <Route path="/checkout/cancel" element={<Navigate to="/cart" />} />
