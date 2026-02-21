@@ -210,3 +210,19 @@ const Home = () => {
 
             {/* Bestsellers - hidden, using CustomSection instead */}
             <section className="mt-12" style={{ display: 'none' }}>
+            </section>
+          </div>
+        </div>
+      </div>
+
+      {/* Featured Reviews Section */}
+      <FeaturedReviews />
+
+      {/* Payment & Delivery Info Section */}
+      <PaymentDeliveryInfo />
+    </div>
+    </>
+  );
+};
+
+export default Home;
