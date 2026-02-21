@@ -2964,3 +2964,506 @@ html {
   }
 }
 
+
+
+/* ============================================
+   BLOCK V2-14: Homepage Retail Components
+   ============================================ */
+
+/* Section Titles */
+.section-title {
+  font-size: 24px;
+  font-weight: 900;
+  color: #111;
+  margin-bottom: 24px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.section-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #0A84FF;
+  font-weight: 600;
+  font-size: 14px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: gap 0.2s;
+}
+
+.section-link:hover {
+  gap: 12px;
+}
+
+/* Deal of Day */
+.deal-of-day {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  border-radius: 24px;
+  padding: 32px 40px;
+  margin-bottom: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.deal-of-day::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(255,214,10,0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.deal-of-day-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.deal-of-day-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #FFD60A;
+  color: #000;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.deal-of-day-title {
+  font-size: 28px;
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.deal-of-day-subtitle {
+  color: rgba(255,255,255,0.7);
+  font-size: 15px;
+}
+
+.deal-of-day-timer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #FFD60A;
+}
+
+.timer-blocks {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.timer-block {
+  background: rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 12px 16px;
+  text-align: center;
+  min-width: 60px;
+}
+
+.timer-value {
+  display: block;
+  font-size: 28px;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+}
+
+.timer-label {
+  display: block;
+  font-size: 11px;
+  color: rgba(255,255,255,0.6);
+  margin-top: 4px;
+  text-transform: uppercase;
+}
+
+.timer-sep {
+  font-size: 24px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.5);
+}
+
+/* Promo Grid */
+.promo-grid {
+  margin-bottom: 48px;
+}
+
+.promo-grid-items {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.promo-card {
+  border-radius: 20px;
+  padding: 24px;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.promo-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+.promo-card-content {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.promo-card-icon {
+  opacity: 0.9;
+}
+
+.promo-card-title {
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.promo-card-subtitle {
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+.promo-card-arrow {
+  font-size: 20px;
+  align-self: flex-end;
+  opacity: 0.7;
+  transition: transform 0.2s;
+}
+
+.promo-card:hover .promo-card-arrow {
+  transform: translateX(4px);
+  opacity: 1;
+}
+
+/* Brands Strip */
+.brands-strip {
+  margin-bottom: 48px;
+}
+
+.brands-strip-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.brand-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.brand-item:hover {
+  border-color: #0A84FF;
+  background: var(--color-primary-light);
+  transform: translateY(-2px);
+}
+
+.brand-logo {
+  font-size: 20px;
+}
+
+.brand-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #333;
+}
+
+/* Advantages Strip */
+.advantages-strip {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 24px;
+  padding: 40px;
+  margin-bottom: 48px;
+}
+
+.advantages-strip-items {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 24px;
+}
+
+.advantage-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+}
+
+.advantage-icon {
+  width: 56px;
+  height: 56px;
+  background: #fff;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0A84FF;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.advantage-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #111;
+  margin: 0;
+}
+
+.advantage-subtitle {
+  font-size: 12px;
+  color: #666;
+  margin: 0;
+}
+
+/* Testimonials */
+.testimonials-section {
+  margin-bottom: 48px;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.testimonial-card {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 20px;
+  padding: 24px;
+  transition: all 0.2s;
+}
+
+.testimonial-card:hover {
+  box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+  transform: translateY(-4px);
+}
+
+.testimonial-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.testimonial-avatar {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #0A84FF 0%, #5856D6 100%);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.testimonial-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111;
+  margin: 0 0 4px 0;
+}
+
+.testimonial-rating {
+  display: flex;
+  gap: 2px;
+}
+
+.testimonial-quote {
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: #e0e0e0;
+}
+
+.testimonial-text {
+  font-size: 14px;
+  color: #444;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.testimonial-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #888;
+}
+
+.testimonial-product {
+  color: #0A84FF;
+  font-weight: 600;
+}
+
+/* Blog Teasers */
+.blog-teasers {
+  margin-bottom: 48px;
+}
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.blog-card {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.blog-card:hover {
+  box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+  transform: translateY(-4px);
+}
+
+.blog-card-image {
+  height: 160px;
+  background: linear-gradient(135deg, #f5f6f8 0%, #e9ecef 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.blog-card-emoji {
+  font-size: 48px;
+}
+
+.blog-card-category {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: #fff;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #0A84FF;
+}
+
+.blog-card-content {
+  padding: 20px;
+}
+
+.blog-card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111;
+  margin: 0 0 8px 0;
+  line-height: 1.4;
+}
+
+.blog-card-excerpt {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 12px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.blog-card-meta {
+  display: flex;
+  gap: 16px;
+}
+
+.blog-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #888;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .promo-grid-items {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .advantages-strip-items {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .deal-of-day {
+    padding: 24px;
+  }
+  
+  .deal-of-day-content {
+    flex-direction: column;
+    gap: 24px;
+    text-align: center;
+  }
+  
+  .deal-of-day-title {
+    font-size: 22px;
+  }
+  
+  .promo-grid-items {
+    grid-template-columns: 1fr;
+  }
+  
+  .promo-card {
+    min-height: 100px;
+    padding: 20px;
+  }
+  
+  .advantages-strip-items {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  
+  .testimonials-grid,
+  .blog-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .brands-strip-items {
+    justify-content: center;
+  }
+}
+
