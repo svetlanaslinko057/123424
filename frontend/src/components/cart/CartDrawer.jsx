@@ -155,9 +155,14 @@ export default function CartDrawer({ isOpen, onClose }) {
               ) : (
                 cartItems.map((item, index) => {
                   const product = products[item.product_id];
-                  if (!product) return null;
-                  
                   const isRemoving = removingItem === item.product_id;
+                  
+                  // Show skeleton if product is still loading
+                  if (!product) {
+                    return (
+                      <div key={item.product_id} className="cart-drawer-item skeleton" />
+                    );
+                  }
                   
                   return (
                     <div 
