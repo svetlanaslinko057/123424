@@ -2846,6 +2846,17 @@ html {
   z-index: 100;
 }
 
+/* MegaMenu 2.0 container - full width under header */
+.v3-mega-container {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  z-index: 100;
+}
+
 /* Navigation */
 .v3-nav {
   display: flex;
