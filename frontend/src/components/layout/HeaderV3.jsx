@@ -229,13 +229,18 @@ export default function HeaderV3() {
           >
             <Menu size={18} />
             <span>Каталог</span>
-            
-            {showMega && (
-              <div className="v3-mega-wrapper">
-                <MegaMenu onClose={() => setShowMega(false)} />
-              </div>
-            )}
           </div>
+          
+          {/* MegaMenu 2.0 - Full width */}
+          {showMega && (
+            <div 
+              className="v3-mega-container"
+              onMouseEnter={() => setShowMega(true)}
+              onMouseLeave={() => setShowMega(false)}
+            >
+              <MegaMenu onClose={() => setShowMega(false)} />
+            </div>
+          )}
 
           {/* Navigation */}
           <nav className="v3-nav">
