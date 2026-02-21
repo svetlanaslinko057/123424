@@ -107,9 +107,9 @@
 - BLOCK V2-13: Cart V2 + Side Drawer + Mini Cart Animation ✅ (2026-02-21)
 
 ### 📋 PENDING (Next Tasks from user)
-- BLOCK V2-13: Cart V2 + Side Drawer + Mini Cart Animation
 - Further UI/UX polish
 - Additional admin features
+- Homepage promo sections refinement
 
 ## URLs
 - **Preview**: https://389b2a17-d4b3-4117-a7c5-38fdbdec5c54.preview.emergentagent.com
