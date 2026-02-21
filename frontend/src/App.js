@@ -22,6 +22,7 @@ import Register from './pages/Register';
 import Products from './pages/Products';
 import ProductDetail from './pages/ProductDetail';
 import EnhancedProductDetail from './components/product/EnhancedProductDetail';
+import ProductPageV3 from './pages/ProductPageV3';
 import Favorites from './pages/Favorites';
 import Comparison from './pages/Comparison';
 import Cart from './pages/Cart';
