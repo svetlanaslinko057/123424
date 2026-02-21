@@ -190,10 +190,10 @@ export default function HeaderV2({ lang = "uk", user, onLogout }) {
           <Link to="/wishlist" className="v2-icon-link" title={t.wishlist} data-testid="wishlist-link">
             <Heart size={20} />
           </Link>
-          <Link to="/cart" className="v2-icon-link cart" title={t.cart} data-testid="cart-link">
-            <ShoppingCart size={20} />
-            {cartCount > 0 && <span className="v2-cart-badge">{cartCount}</span>}
-          </Link>
+          
+          {/* Mini Cart with Drawer */}
+          <MiniCart />
+          
           <Link 
             to={user ? "/account" : "/account"} 
             className="v2-icon-link user" 
