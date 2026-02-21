@@ -3,6 +3,7 @@
 ## Original Problem Statement
 Поднять фронтенд, бэкенд, MongoDB из GitHub репозитория https://github.com/svetlanaslinko057/cccccc2
 Изучить текущий код, архитектуру, админку, фронт, бэк и подготовить к доработке.
+Реализовать Y-STORE V2.1 roadmap - retail-grade single-vendor store.
 
 ## Architecture Summary
 
@@ -15,7 +16,7 @@
 - **Delivery**: Nova Poshta API
 
 ### Key Integrations
-- **Telegram Bot**: @YStore_a_bot (Token: 8239151803:AAF...)
+- **Telegram Bot**: @YStore_a_bot
 - **Nova Poshta API**: 5cb1e3ebc23e75d737fd57c1e056ecc9
 - **Fondy**: Merchant ID 1558123
 - **Emergent LLM Key**: sk-emergent-49e23D0001bD9B3B69
@@ -34,46 +35,72 @@
 - [x] Seeded 40 products and 41 categories
 - [x] Created admin user (admin@ystore.com / admin123)
 
-### Existing Features (from repo)
-#### Backend
-- Full order lifecycle (NEW→AWAITING_PAYMENT→PAID→PROCESSING→SHIPPED→DELIVERED→REFUNDED)
-- TTN tracking via Nova Poshta API
-- Fondy payment integration
-- Refund system
-- CRM module
-- Risk assessment
-- Guard/Fraud detection
-- Analytics (basic + advanced)
-- Automation engine
-- Growth scheduler (abandoned carts, etc.)
+### V2.0 Roadmap Progress - ETAP 1: UX FOUNDATION
 
-#### Frontend
-- Homepage V2 with hero slider, categories, products
-- Catalog V2 with filters, sorting, pagination
-- Product Detail V2 with gallery, specs, reviews
-- Checkout V2 (Guest + Auth)
-- Google OAuth
-- Admin Panel with multiple tabs:
-  - Analytics dashboard
-  - Product management
-  - Category management
-  - Orders analytics
-  - CRM dashboard
-  - Promotions management
-  - Reviews management
-  - Returns dashboard
-  - Risk center
-  - A/B tests
+#### ✅ BLOCK V2-12R: Header V3 - Retail-style header (2026-02-21)
+- Two-row header design
+- Social media icons (Telegram, Instagram, TikTok, Facebook)
+- Phone numbers display
+- Search bar, cart, favorites icons
 
-#### Telegram Bot
-- TTN wizard (create/track shipments)
-- Broadcast wizard (mass notifications)
-- Incidents wizard
-- Pickup control (at-risk parcels)
-- Returns handler
-- Dashboard, orders, deliveries, CRM, finance views
-- Guard alerts
-- Automation engine
+#### ✅ BLOCK V2-13: Cart V2 + Side Drawer (2026-02-21)
+- CartDrawer.jsx - side drawer component
+- MiniCart.jsx - mini cart display
+- Cart animation and UX
+
+#### ✅ BLOCK V2-14: Homepage Retail Layout (2026-02-21)
+- DealOfDay.jsx - daily deal section
+- PromoGrid.jsx - promotional grid
+- BrandsStrip.jsx - brands carousel
+- AdvantagesStrip.jsx - store advantages
+- Testimonials.jsx - customer reviews
+- BlogTeasers.jsx - blog preview
+
+#### ✅ BLOCK V2-15: MegaMenu 2.0 (2026-02-21)
+- 3-column layout
+- Subcategories display
+- Popular tags
+- Promo section
+
+### V2.1 Roadmap Progress - P0 Features (2026-02-21)
+
+#### ✅ BLOCK V2-16: Product Page V3 (Retail Depth)
+- `/app/frontend/src/pages/ProductPageV3.jsx`
+- GalleryV3 component with zoom
+- Sticky buy panel on scroll
+- Trust badges (warranty, delivery, returns)
+- Specifications table
+- Reviews section V3
+- Social proof (live viewers)
+- Breadcrumbs navigation
+
+#### ✅ BLOCK V2-17: Checkout Premium UX
+- `/app/frontend/src/pages/CheckoutV3.jsx`
+- Step-by-step flow (Contacts → Delivery → Payment)
+- Progress indicator
+- CheckoutTrustStrip.jsx - trust badges
+- CheckoutSummarySticky.jsx - sticky order summary
+- Phone formatting
+- Nova Poshta integration
+- Free delivery threshold indicator
+
+#### ✅ BLOCK V2-18: Cabinet 2.0 (Guest Access via OTP)
+- Backend: `/app/backend/modules/cabinet/cabinet_routes.py`
+  - POST /api/v2/cabinet/otp/request - request OTP (MOCKED SMS)
+  - POST /api/v2/cabinet/otp/verify - verify OTP, create session
+  - GET /api/v2/cabinet/guest/orders - guest orders list
+  - GET /api/v2/cabinet/guest/orders/{id} - order details
+  - POST /api/v2/cabinet/guest/logout
+- Frontend:
+  - `/app/frontend/src/pages/CabinetLogin.jsx` - OTP login
+  - `/app/frontend/src/pages/CabinetV2.jsx` - orders list
+  - `/app/frontend/src/pages/OrderDetailsV2.jsx` - order details
+- Features:
+  - Phone-based OTP authentication
+  - Guest cabinet without registration
+  - Order status timeline
+  - TTN tracking integration
+  - Order repeat functionality
 
 ## Current State
 
@@ -87,58 +114,44 @@
 - Categories: 41
 - Users: 1 (admin)
 
-## Credentials
-- **Admin**: admin@ystore.com / admin123
-- **API URL**: https://checkout-premium.preview.emergentagent.com
-
-## V2.0 Roadmap Progress
-
-### ✅ COMPLETE (from previous sessions)
-- BLOCK V2-1: Auth V2 (Google + Email + Guest Checkout)
-- BLOCK V2-2: Account V2 (Cabinet with orders)
-- BLOCK V2-3: Catalog V2 (Filters, Sorting, Pagination)
-- BLOCK V2-4: Homepage V2 Components
-- BLOCK V2-5: Product Page V2 (Gallery, Buy panel)
-- BLOCK V2-8: Header V2 (Search, Navigation)
-- BLOCK V2-9: TTN Tracking + Order Status System
-- BLOCK V2-10: Order Flow + Refunds
-- BLOCK V2-11: Design System + UI Unification Layer
-- BLOCK V2-12: Retail Header + MegaMenu + Search Suggestions
-- BLOCK V2-12R: Header V3 - Retail-style двухстрочный header ✅ (2026-02-21)
-- BLOCK V2-12R.1: Social Block + Visual Balance ✅ (2026-02-21)
-- BLOCK V2-13: Cart V2 + Side Drawer + Mini Cart Animation ✅ (2026-02-21)
-- BLOCK V2-14: Homepage Retail Layout (DealOfDay, PromoGrid, BrandsStrip, Advantages, Testimonials, Blog) ✅ (2026-02-21)
-- BLOCK V2-15: MegaMenu 2.0 (3-column, subcategories, popular tags, promo) ✅ (2026-02-21)
-
-### 📋 PENDING (Next Tasks from user)
-- BLOCK V2-14: Homepage Hero 2.0 (как Foxtrot - фон с глубиной, промо-плашки, анимации)
-- Further UI/UX polish
-- Additional admin features
-
 ## URLs
 - **Preview**: https://checkout-premium.preview.emergentagent.com
 - **API**: https://checkout-premium.preview.emergentagent.com/api
 - **Admin**: /admin (requires admin login)
-- **Telegram Bot**: @YStore_a_bot
+- **Cabinet**: /cabinet (OTP login for guests)
+
+## Credentials
+- **Admin**: admin@ystore.com / admin123
+
+## Prioritized Backlog
+
+### P1 - Next Priority
+- **BLOCK V2-19**: Wishlist + Compare features enhancement
+- **Search Suggestions API**: `/api/v2/search/suggest` for live search
+
+### P2 - Future
+- **BLOCK V2-0**: Remove marketplace remnants (single-vendor focus)
+- **ETAP 3**: Search Engine 2.0, Filters 2.0
+- **ETAP 4**: UI System Upgrade, Mobile Premium
+- **ETAP 5**: Growth & Marketing tools
+
+## Known Mocked Features
+- **OTP SMS**: Code returned in API response for testing (no actual SMS sent)
+- **Delivery Cost**: Simple mock calculation
 
 ## File Structure Summary
 
 ### Backend (/app/backend/)
 ```
 ├── server.py              # Main FastAPI with all endpoints
-├── app.py                 # Modular app (alternative entry)
 ├── core/                  # Config, DB, Security
 ├── modules/
 │   ├── auth/              # Auth V2 (Google OAuth, JWT)
+│   ├── cabinet/           # Cabinet V2 with OTP (NEW)
 │   ├── products/          # Products CRUD
-│   ├── orders/            # Orders V2 + State Machine
+│   ├── orders/            # Orders V2 + Guest checkout
 │   ├── payments/          # Fondy integration
 │   ├── delivery/          # Nova Poshta TTN
-│   ├── refunds/           # Refund system
-│   ├── bot/               # Telegram Admin Bot
-│   ├── crm/               # CRM module
-│   ├── analytics/         # Analytics
-│   ├── guard/             # Fraud detection
 │   └── ...
 └── requirements.txt
 ```
@@ -147,13 +160,23 @@
 ```
 ├── src/
 │   ├── App.js             # Main app with routes
-│   ├── pages/             # All pages (Home, Catalog, Admin, etc.)
-│   ├── components/        # UI components
-│   │   ├── layout/        # HeaderV2, Footer, MegaMenu
-│   │   ├── admin/         # Admin dashboard components
-│   │   └── ui/            # shadcn/ui components
-│   ├── contexts/          # Auth, Cart, Favorites, etc.
-│   ├── services/          # API services
-│   └── utils/             # Utilities
+│   ├── pages/
+│   │   ├── ProductPageV3.jsx    # NEW: Product page V3
+│   │   ├── CheckoutV3.jsx       # NEW: Checkout V3
+│   │   ├── CabinetLogin.jsx     # NEW: OTP login
+│   │   ├── CabinetV2.jsx        # NEW: Orders cabinet
+│   │   ├── OrderDetailsV2.jsx   # NEW: Order details
+│   │   └── ...
+│   ├── components/
+│   │   ├── checkout/
+│   │   │   ├── CheckoutTrustStrip.jsx   # NEW
+│   │   │   └── CheckoutSummarySticky.jsx # NEW
+│   │   └── ...
+│   └── ...
 └── package.json
 ```
+
+## Test Reports
+- Latest: `/app/test_reports/iteration_11.json`
+- Backend success rate: 76%
+- Frontend success rate: 100%
