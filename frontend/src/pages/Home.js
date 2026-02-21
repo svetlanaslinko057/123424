@@ -145,12 +145,38 @@ const Home = () => {
               <ActualOffers />
             </div>
 
+            {/* BLOCK V2-14: Retail Sections */}
+            <div className="mt-8">
+              <DealOfDay />
+            </div>
+
+            <div className="mt-8">
+              <PromoGrid />
+            </div>
+
             {/* Custom Sections - Хіти продажу, Новинки, Популярні та інші */}
             {customSections.map((section) => (
               <div key={section.id} className="mt-8">
                 <CustomSection sectionData={section} />
               </div>
             ))}
+
+            {/* BLOCK V2-14: More Retail Sections */}
+            <div className="mt-8">
+              <BrandsStrip />
+            </div>
+
+            <div className="mt-8">
+              <AdvantagesStrip />
+            </div>
+
+            <div className="mt-8">
+              <Testimonials />
+            </div>
+
+            <div className="mt-8">
+              <BlogTeasers />
+            </div>
 
             {/* Bestsellers - Хіти продажу (старая версия - можно убрать если используем CustomSection) */}
             <section className="mt-12" style={{ display: 'none' }}>
