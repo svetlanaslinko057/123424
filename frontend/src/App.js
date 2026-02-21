@@ -86,7 +86,7 @@ function App() {
                         <Toaster position="top-right" />
                         <WelcomeModal />
                         <MultiLevelCatalog />
-                        <HeaderV2 />
+                        <HeaderV3 />
                         <Routes>
                           <Route path="/" element={<Home />} />
                           <Route path="/login" element={<Login />} />
