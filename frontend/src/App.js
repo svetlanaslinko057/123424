@@ -54,6 +54,10 @@ import Account from './pages/Account';
 import AccountOrders from './pages/AccountOrders';
 import OrderDetails from './pages/OrderDetails';
 import CatalogV2 from './pages/CatalogV2';
+// Cabinet V2 Pages
+import CabinetLogin from './pages/CabinetLogin';
+import CabinetV2 from './pages/CabinetV2';
+import OrderDetailsV2 from './pages/OrderDetailsV2';
 import './App.css';
 
 // Analytics Wrapper Component
