@@ -16,6 +16,16 @@ import { ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../contexts/LanguageContext';
 
+// BLOCK V2-14: Retail Homepage Components
+import { 
+  DealOfDay, 
+  PromoGrid, 
+  BrandsStrip, 
+  AdvantagesStrip, 
+  Testimonials, 
+  BlogTeasers 
+} from '../components/home';
+
 const Home = () => {
   const navigate = useNavigate();
   const { t } = useLanguage();
