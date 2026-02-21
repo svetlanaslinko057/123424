@@ -1397,11 +1397,21 @@ class YStoreAPITester:
         )
         
         test_product_id = None
-        if response and response["success"] and response["data"].get("items"):
-            products = response["data"]["items"]
-            if products:
+        if response and response["success"]:
+            products = response["data"]
+            if isinstance(products, list) and products:
                 test_product_id = products[0]["id"]
                 print(f"Found test product: {test_product_id}")
+            elif isinstance(products, dict) and products.get("items"):
+                test_product_id = products["items"][0]["id"]
+                print(f"Found test product: {test_product_id}")
+        
+        if not test_product_id:
+            print("Getting existing product from cart for testing...")
+            # Use existing product from cart
+            if cart_data.get("items"):
+                test_product_id = cart_data["items"][0]["product_id"]
+                print(f"Using existing product from cart: {test_product_id}")
         
         if not test_product_id:
             return self.log_result("Cart APIs", False, "No products available for cart testing")
