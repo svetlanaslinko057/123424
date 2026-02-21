@@ -1,12 +1,39 @@
 """
-V2-2: Cabinet API - My Orders, Order Details, Guest Linking
+V2-2: Cabinet API - My Orders, Order Details, Guest Linking, OTP Auth
+Includes guest cabinet with phone OTP authentication
 """
 from fastapi import APIRouter, HTTPException, Request, Depends
+from pydantic import BaseModel
 from typing import Optional
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
+import uuid
+import random
+import logging
+
 from core.db import db
 
+logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/v2/cabinet", tags=["Cabinet V2"])
+
+
+# ============= OTP Models =============
+
+class OTPRequest(BaseModel):
+    phone: str
+
+class OTPVerify(BaseModel):
+    phone: str
+    code: str
+
+class OTPResponse(BaseModel):
+    success: bool
+    message: str
+    expires_in: Optional[int] = None
+
+class CabinetSession(BaseModel):
+    token: str
+    phone: str
+    expires_at: str
 
 
 async def get_auth_user(request: Request) -> dict:
