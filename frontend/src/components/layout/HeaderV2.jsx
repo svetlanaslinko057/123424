@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { Search, Menu, Heart, GitCompare, ShoppingCart, User, X, ChevronDown } from "lucide-react";
+import { Search, Menu, Heart, GitCompare, User, X, ChevronDown } from "lucide-react";
 import MegaMenu from "./MegaMenu";
+import { MiniCart } from "../cart";
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
