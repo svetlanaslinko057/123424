@@ -2884,6 +2884,10 @@ html {
     gap: 16px;
   }
   
+  .v3-socials {
+    display: none;
+  }
+  
   .v3-contacts {
     display: none;
   }
