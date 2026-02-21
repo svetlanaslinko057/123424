@@ -105,7 +105,10 @@
 - BLOCK V2-11: Design System + UI Unification Layer
 - BLOCK V2-12: Retail Header + MegaMenu + Search Suggestions
 - BLOCK V2-12R: Header V3 - Retail-style двухстрочный header ✅ (2026-02-21)
+- BLOCK V2-12R.1: Social Block + Visual Balance ✅ (2026-02-21)
 - BLOCK V2-13: Cart V2 + Side Drawer + Mini Cart Animation ✅ (2026-02-21)
+- BLOCK V2-14: Homepage Retail Layout (DealOfDay, PromoGrid, BrandsStrip, Advantages, Testimonials, Blog) ✅ (2026-02-21)
+- BLOCK V2-15: MegaMenu 2.0 (3-column, subcategories, popular tags, promo) ✅ (2026-02-21)
 
 ### 📋 PENDING (Next Tasks from user)
 - BLOCK V2-14: Homepage Hero 2.0 (как Foxtrot - фон с глубиной, промо-плашки, анимации)
