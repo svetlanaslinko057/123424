@@ -208,22 +208,5 @@ const Home = () => {
               )}
             </section>
 
-            {/* Testimonials - ОДИН РАЗ */}
-            <section className="mt-12">
-              <TestimonialsSection />
-            </section>
-          </div>
-        </div>
-      </div>
-
-      {/* Featured Reviews Section */}
-      <FeaturedReviews />
-
-      {/* Payment & Delivery Info Section */}
-      <PaymentDeliveryInfo />
-    </div>
-    </>
-  );
-};
-
-export default Home;
+            {/* Bestsellers - hidden, using CustomSection instead */}
+            <section className="mt-12" style={{ display: 'none' }}>
