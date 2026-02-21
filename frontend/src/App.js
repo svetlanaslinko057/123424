@@ -9,8 +9,8 @@ import { FavoritesProvider } from './contexts/FavoritesContext';
 import { ComparisonProvider } from './contexts/ComparisonContext';
 import { NotificationsProvider } from './contexts/NotificationsContext';
 import { CatalogProvider } from './contexts/CatalogContext';
-// BLOCK V2-12: Use new Retail Header
-import HeaderV2 from './components/layout/HeaderV2';
+// BLOCK V2-12R: Use new Retail Header V3
+import HeaderV3 from './components/layout/HeaderV3';
 import Footer from './components/Footer';
 import AIChatbot from './components/AIChatbot';
 import MultiLevelCatalog from './components/MultiLevelCatalog';
