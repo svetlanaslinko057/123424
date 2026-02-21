@@ -28,6 +28,7 @@ import Comparison from './pages/Comparison';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import CheckoutV2 from './pages/CheckoutV2';
+import CheckoutV3 from './pages/CheckoutV3';
 import CheckoutSuccess from './pages/CheckoutSuccess';
 import AuthCallback from './pages/AuthCallback';
 import SellerDashboard from './pages/SellerDashboard';
