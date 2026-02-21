@@ -114,6 +114,10 @@ function App() {
                           <Route path="/account/orders" element={<AccountOrders />} />
                           <Route path="/account/orders/:id" element={<OrderDetails />} />
                           <Route path="/account/profile" element={<UserProfile />} />
+                          {/* Cabinet V2 Routes */}
+                          <Route path="/cabinet" element={<CabinetV2 />} />
+                          <Route path="/cabinet/login" element={<CabinetLogin />} />
+                          <Route path="/cabinet/orders/:orderId" element={<OrderDetailsV2 />} />
                           <Route path="/seller/dashboard" element={<SellerDashboard />} />
                           <Route path="/admin" element={<AdminPanel />} />
                           <Route path="/admin/pickup-control" element={<PickupControlPage />} />
