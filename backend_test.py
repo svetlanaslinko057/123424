@@ -1354,6 +1354,127 @@ class YStoreAPITester:
             return self.log_result("A/B Quick Estimate", False,
                 f"Status: {response['status_code']}, Data: {response['data']}")
 
+    def test_cart_apis(self):
+        """Test Cart CRUD operations - MAIN REQUIREMENT for Cart V2"""
+        print(f"\n🔍 Testing Cart APIs...")
+        
+        if not self.admin_token:
+            return self.log_result("Cart APIs", False, "No admin token")
+        
+        headers = {"Authorization": f"Bearer {self.admin_token}"}
+        
+        # Test get empty cart first
+        print("Testing GET /api/cart (empty cart)")
+        response, error = self.make_request(
+            'GET', '/cart',
+            headers=headers,
+            expect_status=200
+        )
+        
+        if error:
+            return self.log_result("Cart APIs - Get Cart", False, f"Error: {error}")
+        
+        if not response["success"]:
+            return self.log_result("Cart APIs - Get Cart", False, 
+                f"Status: {response['status_code']}, Data: {response['data']}")
+        
+        # Verify empty cart structure
+        cart_data = response["data"]
+        has_cart_structure = "items" in cart_data and "total" in cart_data and "count" in cart_data
+        if not has_cart_structure:
+            return self.log_result("Cart APIs - Cart Structure", False, 
+                f"Missing cart fields: {list(cart_data.keys())}")
+        
+        self.log_result("Cart APIs - Get Empty Cart", True, f"Empty cart: {cart_data}")
+        
+        # Test add to cart - need to check if there are any products first
+        print("Getting a test product to add to cart...")
+        response, error = self.make_request(
+            'GET', '/products?limit=1',
+            headers=headers,
+            expect_status=200
+        )
+        
+        test_product_id = None
+        if response and response["success"] and response["data"].get("items"):
+            products = response["data"]["items"]
+            if products:
+                test_product_id = products[0]["id"]
+                print(f"Found test product: {test_product_id}")
+        
+        if not test_product_id:
+            return self.log_result("Cart APIs", False, "No products available for cart testing")
+        
+        # Test add to cart
+        print(f"Testing POST /api/cart/add with product {test_product_id}")
+        response, error = self.make_request(
+            'POST', '/cart/add',
+            data={"product_id": test_product_id, "quantity": 2},
+            headers=headers,
+            expect_status=200
+        )
+        
+        if error:
+            return self.log_result("Cart APIs - Add Item", False, f"Error: {error}")
+        
+        add_success = response and response["success"]
+        self.log_result("Cart APIs - Add Item", add_success, 
+            f"Status: {response['status_code']}, Message: {response['data'].get('message')}")
+        
+        # Test get cart with items
+        print("Testing GET /api/cart (with items)")
+        response, error = self.make_request(
+            'GET', '/cart',
+            headers=headers,
+            expect_status=200
+        )
+        
+        cart_with_items = False
+        if response and response["success"]:
+            cart_data = response["data"]
+            cart_with_items = len(cart_data.get("items", [])) > 0
+            self.log_result("Cart APIs - Get Cart With Items", cart_with_items,
+                f"Cart items: {len(cart_data.get('items', []))}, Total: {cart_data.get('total')}")
+        
+        # Test remove from cart
+        print(f"Testing DELETE /api/cart/{test_product_id}")
+        response, error = self.make_request(
+            'DELETE', f'/cart/{test_product_id}',
+            headers=headers,
+            expect_status=200
+        )
+        
+        remove_success = False
+        if response and response["success"]:
+            remove_success = True
+            self.log_result("Cart APIs - Remove Item", True, 
+                f"Message: {response['data'].get('message')}")
+        else:
+            self.log_result("Cart APIs - Remove Item", False, 
+                f"Status: {response['status_code'] if response else 'N/A'}")
+        
+        # Test clear cart
+        print("Testing DELETE /api/cart (clear all)")
+        response, error = self.make_request(
+            'DELETE', '/cart',
+            headers=headers,
+            expect_status=200
+        )
+        
+        clear_success = False
+        if response and response["success"]:
+            clear_success = True
+            self.log_result("Cart APIs - Clear Cart", True, 
+                f"Message: {response['data'].get('message')}")
+        else:
+            self.log_result("Cart APIs - Clear Cart", False, 
+                f"Status: {response['status_code'] if response else 'N/A'}")
+        
+        # Return overall cart API test result
+        all_cart_tests_pass = add_success and cart_with_items and remove_success and clear_success
+        return self.log_result("Cart APIs - Overall", all_cart_tests_pass,
+            f"Add: {add_success}, Get: {cart_with_items}, Remove: {remove_success}, Clear: {clear_success}")
+
     def run_all_tests(self):
         """Run all test scenarios"""
         print("🚀 Starting Y-Store ROE & A/B Testing Backend Tests")
