@@ -27,11 +27,11 @@ print('User ID: ' + userId);
 ## Step 2: Test Backend API
 ```bash
 # Test auth endpoint with cookie
-curl -X GET "https://retail-megastore-dev.preview.emergentagent.com/api/v2/auth/me" \
+curl -X GET "https://checkout-premium.preview.emergentagent.com/api/v2/auth/me" \
   -H "Cookie: session_token=YOUR_SESSION_TOKEN"
 
 # Test with Bearer token
-curl -X GET "https://retail-megastore-dev.preview.emergentagent.com/api/v2/auth/me" \
+curl -X GET "https://checkout-premium.preview.emergentagent.com/api/v2/auth/me" \
   -H "Authorization: Bearer YOUR_SESSION_TOKEN"
 ```
 
@@ -47,7 +47,7 @@ await page.context.add_cookies([{
     "secure": true,
     "sameSite": "None"
 }]);
-await page.goto("https://retail-megastore-dev.preview.emergentagent.com");
+await page.goto("https://checkout-premium.preview.emergentagent.com");
 ```
 
 ## Checklist

@@ -16,7 +16,7 @@ from datetime import datetime
 class V2FeaturesTester:
     def __init__(self):
         # Use production URL from frontend .env
-        self.base_url = "https://retail-megastore-dev.preview.emergentagent.com"
+        self.base_url = "https://checkout-premium.preview.emergentagent.com"
         self.tests_run = 0
         self.tests_passed = 0
 

@@ -89,7 +89,7 @@
 
 ## Credentials
 - **Admin**: admin@ystore.com / admin123
-- **API URL**: https://389b2a17-d4b3-4117-a7c5-38fdbdec5c54.preview.emergentagent.com
+- **API URL**: https://checkout-premium.preview.emergentagent.com
 
 ## V2.0 Roadmap Progress
 
@@ -116,8 +116,8 @@
 - Additional admin features
 
 ## URLs
-- **Preview**: https://389b2a17-d4b3-4117-a7c5-38fdbdec5c54.preview.emergentagent.com
-- **API**: https://389b2a17-d4b3-4117-a7c5-38fdbdec5c54.preview.emergentagent.com/api
+- **Preview**: https://checkout-premium.preview.emergentagent.com
+- **API**: https://checkout-premium.preview.emergentagent.com/api
 - **Admin**: /admin (requires admin login)
 - **Telegram Bot**: @YStore_a_bot
 
